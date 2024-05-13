@@ -6,3 +6,22 @@ includeSubsets:
   name: GF_Latin_Core
 sources:
 - NotoSansOldItalic.designspace
+recipeProvider: noto
+# See #3 - this font with its unusual name needs WWS bit set,
+# so we drop the --include-source-fixes bit of the fix settings
+recipe:
+  ../fonts/NotoSansOldItalic/googlefonts/ttf/NotoSansOldItalic-Regular.ttf:
+  - source: NotoSansOldItalic.designspace
+  - directory: full-designspace
+    operation: addSubset
+    subsets:
+    - from: Noto Sans
+      name: GF_Latin_Core
+  - instance_name: Noto Sans Old Italic Regular
+    operation: instantiateUfo
+    target: full-designspace/instance_ufos/NotoSansOldItalic-Regular.ufo.json
+  - args: --filter ...  --filter FlattenComponentsFilter --filter DecomposeTransformedComponentsFilter
+    operation: buildTTF
+  - args: --fail-ok --auto-script --discount-latin
+    operation: autohint
+  - operation: fix
