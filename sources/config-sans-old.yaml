@@ -12,7 +12,8 @@ recipeProvider: noto
 recipe:
   ../fonts/NotoSansOldItalic/googlefonts/ttf/NotoSansOldItalic-Regular.ttf:
   - source: NotoSansOldItalic.designspace
-  - directory: full-designspace
+  - args: --allow-sparse
+    directory: full-designspace
     operation: addSubset
     subsets:
     - from: Noto Sans
